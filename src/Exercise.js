@@ -50,7 +50,7 @@ const App = () => {
   return (
     <>
       <MainTitile text="Web Dev KS" />
-      <Course courses={courses} />;
+      <Course courses={courses} />
     </>
   );
 };
