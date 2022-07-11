@@ -1,5 +1,6 @@
 import Note from "./components/Note";
 import { useLayoutEffect, useState } from "react";
+import Button from "./components/Button"
 
 const App = ({ notes }) => {
   const [myNotes, setMyNotes] = useState(notes);
@@ -30,6 +31,10 @@ const App = ({ notes }) => {
     ? myNotes
     : myNotes.filter((n) => n.important === true);
 
+  const handleShowAll = () => {
+    setShowAll(!showAll)
+  }
+
   return (
     <div>
       <h1>Notes</h1>
@@ -42,6 +47,7 @@ const App = ({ notes }) => {
         <input value={newNote} onChange={handleInputOnChange} />
         <button type="submit">add note</button>
       </form>
+      <Button label={showAll? "important" : "all"} onClick={handleShowAll}/>
     </div>
   );
 };

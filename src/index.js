@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import Exercise from "./Exercise"
+import PhoneBook from "./Phonebook"
 
 const notes = [
     {
@@ -28,6 +29,6 @@ const notes = [
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App notes={notes}/>
+    <PhoneBook />
   </React.StrictMode>
 );
