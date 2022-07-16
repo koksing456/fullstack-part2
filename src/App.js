@@ -1,11 +1,22 @@
 import Note from "./components/Note";
-import { useLayoutEffect, useState } from "react";
-import Button from "./components/Button"
+import { useLayoutEffect, useState, useEffect } from "react";
+import Button from "./components/Button";
+import axios from "axios";
 
-const App = ({ notes }) => {
-  const [myNotes, setMyNotes] = useState(notes);
+const App = () => {
+  const [myNotes, setMyNotes] = useState([]);
   const [newNote, setNewNote] = useState("a new note");
   const [showAll, setShowAll] = useState(false);
+
+  useEffect(() => {
+    console.log('effect')
+    axios.get("http://localhost:3001/notes").then((res) => {
+      const notes = res.data;
+      console.log(notes);
+      setMyNotes(notes);
+    });
+  }, []);
+  console.log('render', myNotes.length, 'notes')
 
   const addNote = (event) => {
     event.preventDefault();
@@ -32,8 +43,8 @@ const App = ({ notes }) => {
     : myNotes.filter((n) => n.important === true);
 
   const handleShowAll = () => {
-    setShowAll(!showAll)
-  }
+    setShowAll(!showAll);
+  };
 
   return (
     <div>
@@ -47,7 +58,7 @@ const App = ({ notes }) => {
         <input value={newNote} onChange={handleInputOnChange} />
         <button type="submit">add note</button>
       </form>
-      <Button label={showAll? "important" : "all"} onClick={handleShowAll}/>
+      <Button label={showAll ? "important" : "all"} onClick={handleShowAll} />
     </div>
   );
 };
